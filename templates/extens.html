@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html">
+
+<head>
+  <meta charset="UTF-8" http-equiv="Content-Type" >
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<script>
+    var data = {{ s_data|tojson }};
+    var extentable = JSON.parse(data)
+    var i= 0;
+    if (check_exten()==true) {
+            alert('all ext unq');
+            console.log(check_exten())
+            }
+    function date() {
+        for(var i = 1; i < extentable.length; i++){
+            var result = extentable[i];
+            document.write('exten => ' +result.exten + ','+ result.priority + ','+result.app+'('+result.appdata+')' +'\n\n' )
+            }
+    }
+    function check_exten(unq){
+        var exten = new Array();
+        for(var i = 1; i< extentable.length; i++){
+            exten[i] = extentable[i].exten;
+        }
+        for(var i=1; i<exten.length;i++){
+            if(exten[i]==exten[i+1]){
+                if (extentable[i].priority != extentable[i+1].priority && extentable[i].priority!='n'){
+                    return alert('Найдены 2 контекста с одинаковым приоритетом и он не n!')}
+                return false;}
+            else {
+                return (i);
+            }
+            }
+    }
+
+  </script>
+<div id="framecontentLeft">
+    <div class="innertube">
+        <h1>Left </h1>
+        <h3>Left text</h3>
+    </div>
+</div>
+
+<div id="maincontent">
+    <img class="innertube">
+    <h1>Main h1</h1>
+
+        <div id="content">
+            <form method="post" action="{{ url_for('table')}}">
+                <input type="text" name="context" value="default"/><br />
+                <input type="submit" />
+            </form>
+        </div>
+        <br><p>Res:</p></br>
+        <p><script type="text/javascript">date()</script></p>
+    </div>
+</div>
+
+</body>
+
+</html>
+
+

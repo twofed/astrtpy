@@ -24,7 +24,7 @@ a {
 }
 
 h1 {
-    color: #fff;
+    color: black;
     margin: 0;
     font-size: 18px;
     font-weight: 400;
@@ -132,3 +132,36 @@ ul.topnav li a:hover {background-color: #555;}
 
 /* Hide the list item that contains the link that should open and close the topnav on small screens */
 ul.topnav li.icon {display: none;}
+
+#framecontentLeft, #framecontentRight{
+position: absolute;
+top: 0;
+left: 0;
+width: 280px; /*Width of left frame div*/
+height: 100%;
+overflow: hidden; /*Disable scrollbars. Set to "scroll" to enable*/
+background-color: lavender;
+color: white;
+}
+
+#maincontent{
+position: fixed;
+top: 0;
+left: 280px; /*Set left value to WidthOfLeftFrameDiv*/
+bottom: 0;
+overflow: auto;
+background: #fff;
+}
+
+.innertube{
+margin: 15px; /*Margins for inner DIV inside each DIV (to provide padding)*/
+}
+
+* html body{ /*IE6 hack*/
+padding: 0 150px 0 200px; /*Set value to (0 WidthOfRightFrameDiv 0 WidthOfLeftFrameDiv)*/
+}
+
+* html #maincontent{ /*IE6 hack*/
+height: 100%;
+width: 100%;
+}

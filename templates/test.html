@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+<section>
+    <div>
+        <canvas id="canvas5" width="800" height="600">
+         This text is displayed if your browser does not support HTML5 Canvas.
+        </canvas>
+    </div>
+
+<script type="text/javascript">
+var canvas5;
+var ctx5;
+var x5 = 75;
+var y5 = 50;
+var dx5 = 5;
+var dy5 = 3;
+var WIDTH5 = 800;
+var HEIGHT5 = 600;
+var dragok = false;
+
+function rect(x,y,w,h) {
+  ctx5.beginPath();
+  ctx5.rect(x,y,w,h);
+  ctx5.closePath();
+  ctx5.fill();
+}
+
+function clear() {
+  ctx5.clearRect(0, 0, WIDTH5, HEIGHT5);
+}
+
+function init() {
+  canvas5 = document.getElementById("canvas5");
+  ctx5 = canvas5.getContext("2d");
+  return setInterval(draw5, 10);
+}
+
+function draw5() {
+  clear();
+  ctx5.fillStyle = "#fae13c";
+  //ctx5.fillStyle.image = "static/img/ball.svg";
+  rect(0,0,WIDTH5,HEIGHT5);
+  ctx5.fillStyle = "#fa030f";
+  rect(x5 - 15, y5 - 15, 30, 30);
+}
+
+function myMove(e){
+ if (dragok){
+  x5 = e.pageX - canvas5.offsetLeft;
+  y5 = e.pageY - canvas5.offsetTop;
+ }
+}
+
+function myDown(e){
+ if (e.pageX < x5 + 15 + canvas5.offsetLeft)
+  if (e.pageX > x5 - 15 + canvas5.offsetLeft)
+    if (e.pageY < y5 + 15 + canvas5.offsetTop)
+      if (e.pageY > y5 -15 + canvas5.offsetTop){
+  x5 = e.pageX - canvas5.offsetLeft;
+  y5 = e.pageY - canvas5.offsetTop;
+  dragok = true;
+  canvas5.onmousemove = myMove;
+ }
+}
+
+function myUp(){
+dragok = false;
+canvas5.onmousemove = null;
+}
+
+init();
+canvas5.onmousedown = myDown;
+canvas5.onmouseup = myUp;
+</script>
+
+</section>
+</head>
+</html>

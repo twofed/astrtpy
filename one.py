@@ -14,7 +14,6 @@ def form():
 
 @app.route('/search/', methods=['POST'])
 def search():
-
     name=request.form['yourname']
     sip_user_result=tables.SUser.query.filter(tables.SUser.name == name).first()
     check=request.form['check']
@@ -109,13 +108,12 @@ def search():
                            , lastmoddate= sip_user_result.lastmoddate
                            , lastmoduser= sip_user_result.lastmoduser
                            , access= sip_user_result.access)
-@app.route('/palette/', methods=['POST'])
+@app.route('/extens/', methods=['POST'])
 def table():
     global iterat
     get_context=request.form['context']
     r1= tables.TExt().select(get_context)
     res = conn.execute(r1)
-    json_l1 ={}
     a=['array']
     for result in res:
         json_l1 ={
@@ -130,13 +128,12 @@ def table():
             'access' : result['access']
         }
         a.append(json_l1)
-    print json.dumps(a, indent=2)
-    return render_template('palette.html',s_data=json.dumps(a, indent=2))
+    return render_template('extens.html', s_data=json.dumps(a, indent=2))
 
 @app.route('/<page>/')
 def show(page):
-    if page=='palette':
-        return render_template('palette.html', s_data='null')
+    if page=='extens':
+        return render_template('extens.html', s_data='null')
     try:
         return render_template('%s.html' % page)
     except TemplateNotFound:
