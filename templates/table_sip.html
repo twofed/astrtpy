@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+        <meta charset="UTF-8">
+            <ul class="topnav" id="myTopnav">
+                <li><a href="{{ url_for('.show', page='test') }}">realtime</a></li>
+                <li><a href="{{ url_for('.show', page='form_submit') }}">showsip</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about">About</a></li>
+                <li class="icon">
+       <script>function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";}}</script>
+    <a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
+                </li>
+            </ul>
+    </head>
+<body>
+
+<table border="1">
+
+<tr>
+<tr><th>id</th><td><input type="text" name="id" value='{{id}}'/></td></tr>
+<tr><th>accountcode</th><td><input type="text" name="accountcode" value='{{accountcode}}'/></td></tr>
+<tr><th>disallow</th><td><input type="text" name="disallow" value='{{disallow}}'/></td></tr>
+<tr><th>allow</th><td><input type="text" name="allow" value='{{allow}}'/></td></tr>
+<tr><th>allowoverlap</th><td><input type="text" name="allowoverlap" value='{{allowoverlap}}'/></td></tr>
+<tr><th>allowsubscribe</th><td><input type="text" name="allowsubscribe" value='{{allowsubscribe}}'/></td></tr>
+<tr><th>allowtransfer</th><td><input type="text" name="allowtransfer" value='{{allowtransfer}}'/></td></tr>
+<tr><th>amaflags</th><td><input type="text" name="amaflags" value='{{amaflags}}'/></td></tr>
+<tr><th>autoframing</th><td><input type="text" name="autoframing" value='{{autoframing}}'/></td></tr>
+<tr><th>auth</th><td><input type="text" name="auth" value='{{auth}}'/></td></tr>
+<tr><th>buggymwi</th><td><input type="text" name="buggymwi" value='{{buggymwi}}'/></td></tr>
+<tr><th>callgroup</th><td><input type="text" name="callgroup" value='{{callgroup}}'/></td></tr>
+<tr><th>callerid</th><td><input type="text" name="callerid" value='{{callerid}}'/></td></tr>
+<tr><th>cid_number</th><td><input type="text" name="cid_number" value='{{cid_number}}'/></td></tr>
+<tr><th>fullname</th><td><input type="text" name="fullname" value='{{fullname}}'/></td></tr>
+<tr><th>calllimit</th><td><input type="text" name="calllimit" value='{{calllimit}}'/></td></tr>
+<tr><th>callingpres</th><td><input type="text" name="callingpres" value='{{callingpres}}'/></td></tr>
+<tr><th>canreinvite</th><td><input type="text" name="canreinvite" value='{{canreinvite}}'/></td></tr>
+<tr><th>context</th><td><input type="text" name="context" value='{{context}}'/></td></tr>
+<tr><th>defaultip</th><td><input type="text" name="defaultip" value='{{defaultip}}'/></td></tr>
+<tr><th>dtmfmode</th><td><input type="text" name="dtmfmode" value='{{dtmfmode}}'/></td></tr>
+<tr><th>fromuser</th><td><input type="text" name="fromuser" value='{{fromuser}}'/></td></tr>
+<tr><th>fromdomain</th><td><input type="text" name="fromdomain" value='{{fromdomain}}'/></td></tr>
+<tr><th>fullcontact</th><td><input type="text" name="fullcontact" value='{{fullcontact}}'/></td></tr>
+<tr><th>g726nonstandard</th><td><input type="text" name="g726nonstandard" value='{{g726nonstandard}}'/></td></tr>
+<tr><th>host</th><td><input type="text" name="host" value='{{host}}'/></td></tr>
+<tr><th>insecure</th><td><input type="text" name="insecure" value='{{insecure}}'/></td></tr>
+<tr><th>ipaddr</th><td><input type="text" name="ipaddr" value='{{ipaddr}}'/></td></tr>
+<tr><th>language</th><td><input type="text" name="language" value='{{language}}'/></td></tr>
+<tr><th>lastms</th><td><input type="text" name="lastms" value='{{lastms}}'/></td></tr>
+<tr><th>mailbox</th><td><input type="text" name="mailbox" value='{{mailbox}}'/></td></tr>
+<tr><th>maxcallbitrate</th><td><input type="text" name="maxcallbitrate" value='{{maxcallbitrate}}'/></td></tr>
+<tr><th>mohsuggest</th><td><input type="text" name="mohsuggest" value='{{mohsuggest}}'/></td></tr>
+<tr><th>md5secret</th><td><input type="text" name="md5secret" value='{{md5secret}}'/></td></tr>
+<tr><th>musiconhold</th><td><input type="text" name="musiconhold" value='{{musiconhold}}'/></td></tr>
+<tr><th>name</th><td><input type="text" name="name" value='{{name}}'/></td></tr>
+<tr><th>nat</th><td><input type="text" name="nat" value='{{nat}}'/></td></tr>
+<tr><th>outboundproxy</th><td><input type="text" name="outboundproxy" value='{{outboundproxy}}'/></td></tr>
+<tr><th>deny</th><td><input type="text" name="deny" value='{{deny}}'/></td></tr>
+<tr><th>permit</th><td><input type="text" name="permit" value='{{permit}}'/></td></tr>
+<tr><th>pickupgroup</th><td><input type="text" name="pickupgroup" value='{{pickupgroup}}'/></td></tr>
+<tr><th>port</th><td><input type="text" name="port" value='{{port}}'/></td></tr>
+<tr><th>progressinband</th><td><input type="text" name="progressinband" value='{{progressinband}}'/></td></tr>
+<tr><th>promiscredir</th><td><input type="text" name="promiscredir" value='{{promiscredir}}'/></td></tr>
+<tr><th>qualify</th><td><input type="text" name="qualify" value='{{qualify}}'/></td></tr>
+<tr><th>regexten</th><td><input type="text" name="regexten" value='{{regexten}}'/></td></tr>
+<tr><th>regseconds</th><td><input type="text" name="regseconds" value='{{regseconds}}'/></td></tr>
+<tr><th>rfc2833compensate</th><td><input type="text" name="rfc2833compensate" value='{{rfc2833compensate}}'/></td></tr>
+<tr><th>rtptimeout</th><td><input type="text" name="rtptimeout" value='{{rtptimeout}}'/></td></tr>
+<tr><th>rtpholdtimeout</th><td><input type="text" name="rtpholdtimeout" value='{{rtpholdtimeout}}'/></td></tr>
+<tr><th>secret</th><td><input type="text" name="secret" value='{{secret}}'/></td></tr>
+<tr><th>sendrpid</th><td><input type="text" name="sendrpid" value='{{sendrpid}}'/></td></tr>
+<tr><th>setvar</th><td><input type="text" name="setvar" value='{{setvar}}'/></td></tr>
+<tr><th>subscribecontext</th><td><input type="text" name="subscribecontext" value='{{subscribecontext}}'/></td></tr>
+<tr><th>subscribemwi</th><td><input type="text" name="subscribemwi" value='{{subscribemwi}}'/></td></tr>
+<tr><th>t38pt_udptl</th><td><input type="text" name="t38pt_udptl" value='{{t38pt_udptl}}'/></td></tr>
+<tr><th>trustrpid</th><td><input type="text" name="trustrpid" value='{{trustrpid}}'/></td></tr>
+<tr><th>type</th><td><input type="text" name="type" value='{{type}}'/></td></tr>
+<tr><th>useclientcode</th><td><input type="text" name="useclientcode" value='{{useclientcode}}'/></td></tr>
+<tr><th>username</th><td><input type="text" name="username" value='{{username}}'/></td></tr>
+<tr><th>usereqphone</th><td><input type="text" name="usereqphone" value='{{usereqphone}}'/></td></tr>
+<tr><th>videosupport</th><td><input type="text" name="videosupport" value='{{videosupport}}'/></td></tr>
+<tr><th>vmexten</th><td><input type="text" name="vmexten" value='{{vmexten}}'/></td></tr>
+<tr><th>lastmoddate</th><td><input type="text" name="lastmoddate" value='{{lastmoddate}}'/></td></tr>
+<tr><th>lastmoduser</th><td><input type="text" name="lastmoduser" value='{{lastmoduser}}'/></td></tr>
+<tr><th>access</th><td><input type="text" name="access" value='{{access}}'/></td></tr>
+</tr>
+
+</table>
+
+</body>
+</html>

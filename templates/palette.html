@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <br>{{ s_data|tojson }}</br>
+  <script>
+  var data_xyz = {{ s_data|tojson }};
+  var JSONObject = JSON.parse(data_xyz);
+  write(JSONObject.randoms);  
+ </script>
+  
+</body>
+
+</html>

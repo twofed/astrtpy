@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head> <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+        <meta charset="UTF-8">
+        <ul class="topnav" id="myTopnav">
+            <li><a href="{{ url_for('.show', page='test') }}">realtime</a></li>
+            <li><a href="{{ url_for('.show', page='form_submit') }}">showsip</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about">About</a></li>
+            <li class="icon">
+       <script>function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";}}</script>
+        <a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
+            </li>
+        </ul>
+        <title>Search page</title>
+          </head>
+    <body>
+        <div id="container">
+            <div class="title">
+                <h1>Страница поиска</h1>
+            </div>
+            <div id="content">
+                <form method="post" action="{{ url_for('search') }}">
+                    <label for="check">Режим отображения</label>
+                    <p><input name="check" type="radio" value="2" > Все</p>
+                    <p><input name="check" type="radio" value="1" checked="checked"> Красивенько</p>
+                  <label for="yourname">Name: {{error}}</label>
+                  <input type="text" name="yourname" /><br />
+                  <input type="submit" />
+
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
