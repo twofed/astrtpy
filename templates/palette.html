@@ -1,18 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
-  <meta charset="UTF-8">
-</head>
+  <meta charset="UTF-8" http-equiv="Content-Type" >
+    <style type="text/css">
 
+body{
+margin: 0;
+padding: 0;
+border: 0;
+overflow: hidden;
+height: 100%;
+max-height: 100%;
+}
+
+#framecontentLeft, #framecontentRight{
+position: absolute;
+top: 0;
+left: 0;
+width: 200px; /*Width of left frame div*/
+height: 100%;
+overflow: hidden; /*Disable scrollbars. Set to "scroll" to enable*/
+background-color: navy;
+color: white;
+}
+
+#framecontentRight{
+left: auto;
+right: 0;
+width: 150px; /*Width of right frame div*/
+overflow: hidden; /*Disable scrollbars. Set to "scroll" to enable*/
+background-color: navy;
+color: white;
+}
+
+#maincontent{
+position: fixed;
+top: 0;
+left: 200px; /*Set left value to WidthOfLeftFrameDiv*/
+right: 150px; /*Set right value to WidthOfRightFrameDiv*/
+bottom: 0;
+overflow: auto;
+background: #fff;
+}
+
+.innertube{
+margin: 15px; /*Margins for inner DIV inside each DIV (to provide padding)*/
+}
+
+* html body{ /*IE6 hack*/
+padding: 0 150px 0 200px; /*Set value to (0 WidthOfRightFrameDiv 0 WidthOfLeftFrameDiv)*/
+}
+
+* html #maincontent{ /*IE6 hack*/
+height: 100%;
+width: 100%;
+}
+
+</style>
+</head>
 <body>
-  <br>{{ s_data|tojson }}</br>
+<br>
   <script>
-  var data_xyz = {{ s_data|tojson }};
-  var JSONObject = JSON.parse(data_xyz);
-  write(JSONObject.randoms);  
- </script>
-  
+      var data = {{ s_data|tojson }};
+    var extentable = JSON.parse(data)
+    alert(extentable.step1.app)
+      var gibberish=["Example here"]
+      function filltext(words){
+          document.write(gibberish+" ")
+      }
+      function date(iter,q) {
+          for(var z=1;z<=iter;z++){
+              xors=q+z
+              console.log(xors)
+              document.write(extentable.step[z].app)
+          }
+      }
+  </script>
+<div id="framecontentLeft">
+    <div class="innertube">
+        <h1>Left </h1>
+        <h3>Left text</h3>
+    </div>
+</div>
+<div id="framecontentRight">
+    <div class="innertube">
+        <h1>Right</h1>
+    </div>
+</div>
+<div id="maincontent">
+    <div class="innertube">
+    <h1>Main h1</h1>
+        <div id="content">
+            <form method="post" action="{{ url_for('table')}}">
+                <input type="text" name="context" value="default"/><br />
+                <input type="submit" />
+            </form>
+        </div>
+        <br><p>{{ s_data|tojson }}</p></br>
+        <input id="conetent" value=""></input>
+        <p><script type="text/javascript">date({{ i }},'step')</script></p>
+    </div>
+</div>
+
 </body>
 
 </html>
+
+

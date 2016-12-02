@@ -1,11 +1,11 @@
-from flask import Flask,render_template, request,jsonify
-from flask import abort
+from flask import Flask,render_template, request,jsonify,abort,Response, jsonify
 from jinja2 import TemplateNotFound
-import random
+import databases
 import simplejson as json
-#import tables
+import tables
 
-app = Flask(__name__,template_folder='templates')
+app = Flask(__name__, template_folder='templates')
+conn = databases.engine.connect()
 
 @app.route('/')
 def form():
@@ -109,23 +109,35 @@ def search():
                            , lastmoddate= sip_user_result.lastmoddate
                            , lastmoduser= sip_user_result.lastmoduser
                            , access= sip_user_result.access)
-@app.route('/palette/')
+@app.route('/palette/', methods=['POST'])
 def table():
-    json_helper = {}
-    json_helper['id'] = 1 # exten_result=tables.TExt.query.filter(tables.TExt.id == id).first()
-    json_helper['context'] = 'default' # exten_result=tables.TExt.query.filter(tables.TExt.context == context).first()
-    json_helper['exten'] = '_X.' # exten_result=tables.TExt.query.filter(tables.TExt.exten == exten).first()
-    json_helper['priority'] = 1 # exten_result=tables.TExt.query.filter(tables.TExt.priority == priority).first()
-    json_helper['app'] = 'Dial' # exten_result=tables.TExt.query.filter(tables.TExt.app == app).first()
-    json_helper['appdata'] = 'SIP/${EXTEN}' # exten_result=tables.TExt.query.filter(tables.TExt.appdata == appdata).first()
-    json_helper['lastmodname'] = 'admin'  # exten_result=tables.TExt.query.filter(tables.TExt.lastmodname == lastmodname).first()
-    json_helper['lastmoddate'] = '01-01-2012 11:01:00' # exten_result=tables.TExt.query.filter(tables.TExt.lastmoddate == lastmoddate).first()
-    json_helper['access'] = 'admin' # exten_result=tables.TExt.query.filter(tables.TExt.access == access).first()  
-    json_object = json.dumps(json_helper)
-    return render_template('palette.html',s_data=json_object)
+    global iterat
+    get_context=request.form['context']
+    r1= tables.TExt().select(get_context)
+    res = conn.execute(r1)
+    i=0
+    for result in res:
+        i=1
+        json_res = {}
+        json_res['id'] = result['id']
+        json_res['context'] = result['context']
+        json_res['exten'] = result['exten']
+        json_res['priority'] = result['priority']
+        json_res['app'] = result['app']
+        json_res['appdata'] = result['appdata']
+        json_res['lastmodname'] = result['lastmodname']
+        json_res['lastmoddate'] = result['lastmodname']
+        json_res['access'] = result['access']
+        json_send =json.dumps(json_res)
+    print json_send
+    return render_template('palette.html',s_data=json_send,i=i)
 
+#tuturu
 @app.route('/<page>/')
 def show(page):
+    print page
+    if page=='palette':
+        return render_template('palette.html', s_data='null')
     try:
         return render_template('%s.html' % page)
     except TemplateNotFound:

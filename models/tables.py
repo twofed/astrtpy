@@ -1,6 +1,6 @@
-from ext.databases import Base
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
-
+from databases import Base
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey,Table
+from sqlalchemy.sql import select
 
 
 class SUser(Base):
@@ -59,11 +59,23 @@ class SUser(Base):
         return '%s %s %s' % (self.name,self.callerid,self.fullcontact)
 
 
-#class TExt(Base):
-#    _tablename__ = 'extensions'
-#
-#    def __init__(self,x):
-#        x=None
+class TExt(Base):
+    __tablename__ = 'extensions'
+    id = Column(Integer, primary_key=True)
+    context = Column(String(100), unique=False)
+    exten = Column(String(100), unique=False)
+    priority = Column(String(100), unique=False)
+    app = Column(String(100), unique=False)
+    appdata = Column(String(100), unique=False)
+    lastmoddate= Column(DateTime, unique=False)#!
+    lastmodname= Column(String(100), unique=False)
+    access= Column(String(100), unique=False)
+
+    def __init__(self, context=None):
+        self.context= context
+
+    def select(self,context):
+        return select([TExt]).where(TExt.context==context)
 
 
 #class TCdr(Base):
