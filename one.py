@@ -133,6 +133,7 @@ def table():
     return render_template('palette.html',s_data=json_send,i=i)
 
 #tuturu
+#qq
 @app.route('/<page>/')
 def show(page):
     print page
