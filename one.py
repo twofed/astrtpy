@@ -115,28 +115,26 @@ def table():
     get_context=request.form['context']
     r1= tables.TExt().select(get_context)
     res = conn.execute(r1)
-    i=0
+    json_l1 ={}
+    a=['array']
     for result in res:
-        i=1
-        json_res = {}
-        json_res['id'] = result['id']
-        json_res['context'] = result['context']
-        json_res['exten'] = result['exten']
-        json_res['priority'] = result['priority']
-        json_res['app'] = result['app']
-        json_res['appdata'] = result['appdata']
-        json_res['lastmodname'] = result['lastmodname']
-        json_res['lastmoddate'] = result['lastmodname']
-        json_res['access'] = result['access']
-        json_send =json.dumps(json_res)
-    print json_send
-    return render_template('palette.html',s_data=json_send,i=i)
+        json_l1 ={
+            'id' : result['id'],
+            'context' : result['context'],
+            'exten' : result['exten'],
+            'priority' : result['priority'],
+            'app' : result['app'],
+            'appdata' : result['appdata'],
+            'lastmodname' : result['lastmodname'],
+            'lastmoddate' : result['lastmodname'],
+            'access' : result['access']
+        }
+        a.append(json_l1)
+    print json.dumps(a, indent=2)
+    return render_template('palette.html',s_data=json.dumps(a, indent=2))
 
-#tuturu
-#qq
 @app.route('/<page>/')
 def show(page):
-    print page
     if page=='palette':
         return render_template('palette.html', s_data='null')
     try:

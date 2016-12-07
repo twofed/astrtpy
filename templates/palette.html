@@ -64,18 +64,13 @@ width: 100%;
   <script>
       var data = {{ s_data|tojson }};
     var extentable = JSON.parse(data)
-    alert(extentable.step1.app)
-      var gibberish=["Example here"]
-      function filltext(words){
-          document.write(gibberish+" ")
-      }
-      function date(iter,q) {
-          for(var z=1;z<=iter;z++){
-              xors=q+z
-              console.log(xors)
-              document.write(extentable.step[z].app)
-          }
-      }
+      function date() {
+          for(var i = 1; i < extentable.length; i++){
+              var  lala = extentable[i];
+              document.write('exten => ' +lala.exten + ','+ lala.priority + ','+lala.app+'('+lala.appdata+')' )
+              }
+          console.log(extentable.length)
+    }
   </script>
 <div id="framecontentLeft">
     <div class="innertube">
@@ -99,7 +94,7 @@ width: 100%;
         </div>
         <br><p>{{ s_data|tojson }}</p></br>
         <input id="conetent" value=""></input>
-        <p><script type="text/javascript">date({{ i }},'step')</script></p>
+        <p><script type="text/javascript">date()</script></p>
     </div>
 </div>
 
