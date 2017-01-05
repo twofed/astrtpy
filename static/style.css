@@ -134,7 +134,6 @@ ul.topnav li a:hover {background-color: #555;}
 ul.topnav li.icon {display: none;}
 
 #framecontentLeft, #framecontentRight{
-position: absolute;
 top: 0;
 left: 0;
 width: 280px; /*Width of left frame div*/
