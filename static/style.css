@@ -134,16 +134,18 @@ ul.topnav li a:hover {background-color: #555;}
 ul.topnav li.icon {display: none;}
 
 #framecontentLeft, #framecontentRight{
+
 top: 0;
 left: 0;
 width: 280px; /*Width of left frame div*/
 height: 100%;
 overflow: hidden; /*Disable scrollbars. Set to "scroll" to enable*/
 background-color: lavender;
-color: white;
+color: #000000;
 }
 
 #maincontent{
+border: 4px double black;
 position: fixed;
 top: 0;
 left: 280px; /*Set left value to WidthOfLeftFrameDiv*/

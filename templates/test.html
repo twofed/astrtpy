@@ -1,34 +1,28 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/html">
-
 <head>
-
-  <meta charset="UTF-8">
-    <div>
-        <div id="dragObjects2">
-         <img src="{{ url_for('static', filename='img/noop.png') }}" name="NoOp"></img>
-            <img src="{{ url_for('static', filename='img/answer.png') }}" name="answer"></img>
-            <img src="{{ url_for('static', filename='img/dial.png') }}" name="Dial"></img>
-            <img src="{{ url_for('static', filename='img/goto.png') }}" name="goto"></img>
-        </div>
-        <p>
-            <img src="{{ url_for('static', filename='img/ball.svg') }}" style="margin-left:100px" id="trash2"><br>
-        </p>
-    </div>
-
-</head>
-<script src="{{ url_for('static', filename='js/DragObject.js') }}"></script>
-<script src="{{ url_for('static', filename='js/DropTarget.js') }}"></script>
-<script src="{{ url_for('static', filename='js/dragMaster.js') }}"></script>
-<script src="{{ url_for('static', filename='js/helpers.js') }}"></script>
-<script>
-onload = function() {
-    var dragObjects = document.getElementById('dragObjects2').getElementsByTagName('img')
-    for(var i=0; i<dragObjects.length; i++) {
-        new DragObject(dragObjects[i])
-    }
-
-    new DropTarget(document.getElementById('trash2'))
-}
-</script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type=text/javascript>
+			$(function() {
+			  $('a#process_input').bind('click', function() {
+				$.getJSON('/updatedata', {
+				  proglang: $('input[name="proglang"]').val(),
+				}, function(data) {
+				  $("#result").text(data.result);
+				});
+				return false;
+			  });
+			});
+		</script>
+	</head>
+	<body>
+		<div class='container'>
+		<h3>Welcome! Which is the best programming language of them all?</h3>
+			<form>
+				<input type=text size=5 name=proglang>
+				<a href=# id=process_input><button class='btn btn-default'>Submit</button></a>
+			</form>
+		<p id=result></p>
+		</div>
+	</body>
 </html>

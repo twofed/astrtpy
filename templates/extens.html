@@ -1,89 +1,70 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
       xmlns="http://www.w3.org/1999/html">
-
 <head>
   <meta charset="UTF-8" http-equiv="Content-Type" >
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-<script src="{{ url_for('static', filename='js/DragObject.js') }}"></script>
-<script src="{{ url_for('static', filename='js/DropTarget.js') }}"></script>
-<script src="{{ url_for('static', filename='js/dragMaster.js') }}"></script>
-<script src="{{ url_for('static', filename='js/helpers.js') }}"></script>
-<script>
-    var data = {{ s_data|tojson }};
-    var extentable = JSON.parse(data);
-    var i= 0;
-    check_exten();
-
-    function getdata() {
-        for(var i = 1; i < extentable.length; i++){
-            var result = extentable[i];
-            document.write('exten => ' +result.exten + ','+ result.priority + ','+result.app+'('+result.appdata+')' +'\n\n' )
-        }
-    }
-    function check_exten(){
-        var exten = new Array();
-        for(var i = 1; i< extentable.length; i++){
-            exten[i] = extentable[i].exten;
-        }
-        for(var i=1; i<exten.length;i++){
-            if(exten[i]==exten[i+1]){
-                if (extentable[i].priority != extentable[i+1].priority && extentable[i].priority!='n'){
-                    return alert('Найдены 2 контекста с одинаковым приоритетом и он не n!')}
-                return false;}
-            else {
-                return (i);
-            }
-            }
-    }
-
-  </script>
+{#<script src="{{ url_for('static', filename='js/DragObject.js') }}"></script>#}
+{#<script src="{{ url_for('static', filename='js/DropTarget.js') }}"></script>#}
+{#<script src="{{ url_for('static', filename='js/dragMaster.js') }}"></script>#}
+{#<script src="{{ url_for('static', filename='js/helpers.js') }}"></script>#}
+<script src="{{ url_for('static', filename='js/rtexten.js') }}"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <div id="maincontent">
     <h1>Main</h1>
-        <div id="cavans">
-            <script>getdata()</script>
-        </div>
+    <table id="example" class="display" width="100%"></table>
+    <div id="exten">
+        <script>var data = {{ s_data|tojson }};
+                var extentable = JSON.parse(data);
+                check_exten(extentable);
+                getdata(extentable)
+        </script>
     </div>
 </div>
 <div id="framecontentLeft">
     <div class="innertube">
         <div id="search">
-            <form method="post" action="{{ url_for('table')}}">
-                <input type="text" name="context" value="default"/><br />
-                <input type="submit" />
+            <form method="post" action="{{ url_for('table')}}">Search context
+                <input type="text" name="context" value="default"/>
+                <input type="submit" /><h3 style="position: static">
+{#                    Last Element Selected#}
+{#                <img id="selected"></h3>#}
             </form>
         </div>
-        <h1>App-group-one</h1>
-        <div id="appgroup">
-            <img src="{{ url_for('static', filename='img/noop.png') }}" name="NoOp"></img>
-            <img src="{{ url_for('static', filename='img/answer.png') }}" name="answer"></img>
-            <img src="{{ url_for('static', filename='img/dial.png') }}" name="Dial"></img>
-            <img src="{{ url_for('static', filename='img/goto.png') }}" name="goto"></img>
-            <img src="{{ url_for('static', filename='img/gotoif.png') }}" name="gotoif"></img>
-            <img src="{{ url_for('static', filename='img/gotoiftime.png') }}" name="gotoiftime"></img>
-            <img src="{{ url_for('static', filename='img/set.png') }}" name="set"></img>
-            <img src="{{ url_for('static', filename='img/hangup.png') }}" name="hangup"></img>
-            <img src="{{ url_for('static', filename='img/wait.png') }}" name="wait"></img>
-            <img src="{{ url_for('static', filename='img/playback.png') }}" name="playback"></img>
-            <img src="{{ url_for('static', filename='img/background.png') }}" name="background"></img>
-        </div>
-        <h1>App-group-two</h1>
+{#        <h1>App-group-one</h1>#}
+{#        <div id="appgroup">#}
+{#            <img src="{{ url_for('static', filename='img/noop.png') }}" name="NoOp"></img>#}
+{#            <img src="{{ url_for('static', filename='img/answer.png') }}" name="answer"></img>#}
+{#            <img src="{{ url_for('static', filename='img/dial.png') }}" name="Dial"></img>#}
+{#            <img src="{{ url_for('static', filename='img/goto.png') }}" name="goto"></img>#}
+{#            <img src="{{ url_for('static', filename='img/gotoif.png') }}" name="gotoif"></img>#}
+{#            <img src="{{ url_for('static', filename='img/gotoiftime.png') }}" name="gotoiftime"></img>#}
+{#            <img src="{{ url_for('static', filename='img/set.png') }}" name="set"></img>#}
+{#            <img src="{{ url_for('static', filename='img/hangup.png') }}" name="hangup"></img>#}
+{#            <img src="{{ url_for('static', filename='img/wait.png') }}" name="wait"></img>#}
+{#            <img src="{{ url_for('static', filename='img/playback.png') }}" name="playback"></img>#}
+{#            <img src="{{ url_for('static', filename='img/background.png') }}" name="background"></img>#}
+{#        </div>#}
+{#        <h1>App-group-two</h1>#}
     </div>
 </div>
 
-<script>
-    onload = function() {
-        var dragObjects = document.getElementById('appgroup').getElementsByTagName('img');
-        for(var i=0; i<dragObjects.length; i++) {
-            new DragObject(dragObjects[i])
-        }
-        new DropTarget(document.getElementById('maincontent'))
-    }
-</script>
+{#<script>#}
+{#    onload = function() {#}
+{#        var dragObjects = document.getElementById('appgroup').getElementsByTagName('img');#}
+{#        var wind = document.getElementById('selected');#}
+{#        for(var i=0; i<dragObjects.length; i++) {#}
+{#            new DragObject(dragObjects[i],wind)#}
+{#        }#}
+{#        new DropTarget(document.getElementById('maincontent'))#}
+{#        new DropTarget(document.getElementById('appgroup'))#}
+{#    }#}
+{#</script>#}
 </body>
-
 </html>
 
 

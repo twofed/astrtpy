@@ -75,7 +75,7 @@ class TExt(Base):
         self.context= context
 
     def select(self,context):
-        return select([TExt]).where(TExt.context==context)
+        return select([TExt]).where(TExt.context==context).order_by('context','exten')
 
 
 #class TCdr(Base):

@@ -130,6 +130,17 @@ def table():
         a.append(json_l1)
     return render_template('extens.html', s_data=json.dumps(a, indent=2))
 
+# @app.route('/updatedata/')
+# def background_process():
+#     try:
+#             lang = request.args.get('proglang', 0, type=str)
+#             if lang.lower() == 'python':
+#                 return jsonify(result='You are wise')
+#             else:
+#                 return jsonify(result='Try again.')
+#     except Exception as e:
+#         return str(e)
+
 @app.route('/<page>/')
 def show(page):
     if page=='extens':
@@ -138,7 +149,6 @@ def show(page):
         return render_template('%s.html' % page)
     except TemplateNotFound:
         abort(404)
-
 
 if __name__ == '__main__':
     app.run(debug=False)
