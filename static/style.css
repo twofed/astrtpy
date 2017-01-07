@@ -4,7 +4,7 @@
 
 body {
     font-family: "Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
-    color: #888;
+    color: #000000;
     font-style: normal;
     font-size: 14px;
     line-height: 22px;
@@ -133,13 +133,13 @@ ul.topnav li a:hover {background-color: #555;}
 /* Hide the list item that contains the link that should open and close the topnav on small screens */
 ul.topnav li.icon {display: none;}
 
-#framecontentLeft, #framecontentRight{
-
+#framecontentLeft{
+position: fixed;
 top: 0;
 left: 0;
-width: 280px; /*Width of left frame div*/
+width: 300px; /*Width of left frame div*/
 height: 100%;
-overflow: hidden; /*Disable scrollbars. Set to "scroll" to enable*/
+overflow: scroll; /*Disable scrollbars. Set to "scroll" to enable*/
 background-color: lavender;
 color: #000000;
 }
@@ -148,10 +148,12 @@ color: #000000;
 border: 4px double black;
 position: fixed;
 top: 0;
-left: 280px; /*Set left value to WidthOfLeftFrameDiv*/
+height: 100%;
+width: 70%;
+left: 300px; /*Set left value to WidthOfLeftFrameDiv*/
 bottom: 0;
-overflow: auto;
-background: #fff;
+overflow: scroll;
+background: #eeeeee;
 }
 
 .innertube{

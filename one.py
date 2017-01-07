@@ -6,7 +6,7 @@ import tables
 
 app = Flask(__name__, template_folder='templates')
 conn = databases.engine.connect()
-
+extcashe=['array']
 @app.route('/')
 def form():
     return render_template('form_submit.html')
@@ -108,7 +108,8 @@ def search():
                            , lastmoddate= sip_user_result.lastmoddate
                            , lastmoduser= sip_user_result.lastmoduser
                            , access= sip_user_result.access)
-@app.route('/extens/', methods=['POST'])
+
+@app.route('/test/', methods=['POST','JSON'])
 def table():
     global iterat
     get_context=request.form['context']
@@ -124,27 +125,28 @@ def table():
             'app' : result['app'],
             'appdata' : result['appdata'],
             'lastmodname' : result['lastmodname'],
-            'lastmoddate' : result['lastmodname'],
+            'lastmoddate' : str(result['lastmoddate']),
             'access' : result['access']
         }
         a.append(json_l1)
-    return render_template('extens.html', s_data=json.dumps(a, indent=2))
+    return render_template('test.html', s_data=json.dumps(a, indent=2))
 
-# @app.route('/updatedata/')
-# def background_process():
-#     try:
-#             lang = request.args.get('proglang', 0, type=str)
-#             if lang.lower() == 'python':
-#                 return jsonify(result='You are wise')
-#             else:
-#                 return jsonify(result='Try again.')
-#     except Exception as e:
-#         return str(e)
+@app.route('/updateexten/', methods=['POST','GET'])
+def updateexten():
+    if request.method == "POST":
+        # load _sid and _uip from posted JSON and save other data
+        # but request.form is empty.
+        # >>> request.form
+        # ImmutableMultiDict([])
+        #extcashe.append()
+        print request.form
+        return str('OK')
+
 
 @app.route('/<page>/')
 def show(page):
-    if page=='extens':
-        return render_template('extens.html', s_data='null')
+    if page=='test':
+        return render_template('test.html', s_data='null')
     try:
         return render_template('%s.html' % page)
     except TemplateNotFound:

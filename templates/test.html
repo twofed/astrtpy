@@ -1,28 +1,52 @@
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/html">
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html">
 <head>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script type=text/javascript>
-			$(function() {
-			  $('a#process_input').bind('click', function() {
-				$.getJSON('/updatedata', {
-				  proglang: $('input[name="proglang"]').val(),
-				}, function(data) {
-				  $("#result").text(data.result);
-				});
-				return false;
-			  });
-			});
-		</script>
-	</head>
-	<body>
-		<div class='container'>
-		<h3>Welcome! Which is the best programming language of them all?</h3>
-			<form>
-				<input type=text size=5 name=proglang>
-				<a href=# id=process_input><button class='btn btn-default'>Submit</button></a>
-			</form>
-		<p id=result></p>
-		</div>
-	</body>
+  <meta charset="UTF-8" http-equiv="Content-Type" >
+    <link rel=stylesheet type=text/css href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+{#    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/dt-1.10.13/jqc-1.11.3,dt-1.10.13,b-1.2.4,se-1.2.1/datatables.min.css"/>#}
+{#    <link rel="stylesheet" type="text/css" href="Editor-1.6.1/css/editor.dataTables.css">#}
+</head>
+<body>
+<script src="{{ url_for('static', filename='js/rtexten.js') }}"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+{#<script type="text/javascript" src="https://cdn.datatables.net/r/dt-1.10.13/jqc-1.11.3,dt-1.10.13,b-1.2.4,se-1.2.1/datatables.min.js"></script>#}
+{#<script type="text/javascript" src="Editor-1.6.1/js/dataTables.editor.js"></script>#}
+
+<div id="maincontent">
+    <h1>ExtTable</h1>
+    <table id="tableext" class="display">
+        <th>Context</th>
+    </table>
+    <div id="exten">
+        <script>
+            var data = {{ s_data|tojson }};
+            var extentable = JSON.parse(data);
+        </script>
+    </div>
+</div>
+<div id="framecontentLeft">
+    <div class="innertube">
+        <div id="search">
+            <form method="post" action="{{ url_for('table')}}">Search context
+                <input type="text" name="context" value="default"/>
+                <input type="submit" /><h3 style="position: static"></h3>
+            </form>
+        </div>
+        <div class="content" style="text-align: left; white-space: nowrap;">
+            <script>getdata(extentable);
+                check_exten(extentable);
+            if (check_exten(extentable)==false){
+                drawtable(extentable);
+            }
+            </script>
+        </div>
+    </div>
+</div>
+
+</body>
 </html>
+
+
